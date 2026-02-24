@@ -63,6 +63,9 @@ func handleConn(connection net.Conn) {
 
 	// send res to client
 	response := "HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nhii"
-	connection.Write([]byte(response))
+	_, err = connection.Write([]byte(response))
+	if err != nil {
+		println("Error occur send res")
+	}
 
 }
