@@ -59,4 +59,10 @@ func handleConn(connection net.Conn) {
 		return
 	}
 
+	print("Request :", data)
+
+	// send res to client
+	response := "HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nhii"
+	connection.Write([]byte(response))
+
 }
