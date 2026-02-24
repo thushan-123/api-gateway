@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	println("Welcome to the API Gateway")
+	println("Welcome to the API Gateway\n\n TCP server Listing on 127.0.0.1:8080")
 
 	// server listing incoming http request -> TCP
 
@@ -38,6 +38,8 @@ func main() {
 		//
 		//connection.Close()
 
+		go handleConn(connection)
+
 	}
 }
 
@@ -45,7 +47,16 @@ func handleConn(connection net.Conn) {
 	defer func(connection net.Conn) {
 		err := connection.Close()
 		if err != nil {
-
+			println("Connection close error", err)
 		}
 	}(connection)
+
+	reader := bufio.NewReader(connection)
+	data, err := reader.ReadString('\n')
+
+	if err != nil {
+		println("Error occur read string", err)
+		return
+	}
+
 }
