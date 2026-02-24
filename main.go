@@ -1,18 +1,26 @@
 package main
 
-import "net"
+import (
+	"bufio"
+	"net"
+)
 
 func main() {
 	println("Welcome to the API Gateway")
 
 	// server listing incoming http request -> TCP
 
-	lis, err := net.Listen("tcp", ":8080")
+	lis, err := net.Listen("tcp", "127.0.0.1:8080")
 
 	if err != nil {
 		panic(err)
 	}
-	defer lis.Close() // close program after exit
+	defer func(lis net.Listener) {
+		err := lis.Close()
+		if err != nil {
+			println("ERROR : ", err)
+		}
+	}(lis)
 
 	for {
 		connection, err := lis.Accept()
@@ -22,11 +30,22 @@ func main() {
 			continue
 		}
 
-		println("req :", connection)
-		responce := "hii"
-		connection.Write([]byte(responce))
-
-		connection.Close()
+		////println("req :", connection)
+		//reader := bufio.NewReader(connection)
+		//print(reader)
+		//responce := "HTTP/1.1 200 OK\\r\\nContent-Length: 3\\r\\n\\r\\nhii"
+		//connection.Write([]byte(responce))
+		//
+		//connection.Close()
 
 	}
+}
+
+func handleConn(connection net.Conn) {
+	defer func(connection net.Conn) {
+		err := connection.Close()
+		if err != nil {
+
+		}
+	}(connection)
 }
