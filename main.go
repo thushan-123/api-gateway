@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"net"
 )
 
@@ -59,7 +60,7 @@ func handleConn(connection net.Conn) {
 		return
 	}
 
-	print("Request :", data)
+	fmt.Printf("%q\n", data)
 
 	// send res to client
 	response := "HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nhii"
@@ -69,3 +70,25 @@ func handleConn(connection net.Conn) {
 	}
 
 }
+
+//fmt.Println("----- HTTP REQUEST -----")
+//
+//for {
+//line, err := reader.ReadString('\n')
+//if err != nil {
+//break
+//}
+//
+//// remove \r\n
+//cleanLine := strings.TrimRight(line, "\r\n")
+//
+//// stop at empty line (end of headers)
+//if cleanLine == "" {
+//break
+//}
+//
+//fmt.Println(cleanLine)
+//}
+//
+//response := "HTTP/1.1 200 OK\r\nContent-Length: 3\r\n\r\nhii"
+//conn.Write([]byte(response))
