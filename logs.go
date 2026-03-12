@@ -18,3 +18,7 @@ func InitLogs() {
 	log.SetOutput(multiWriter)
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 }
+
+func ErrorLog(err string) {
+
+}
