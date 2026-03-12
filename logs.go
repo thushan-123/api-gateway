@@ -16,4 +16,5 @@ func InitLogs() {
 
 	multiWriter := io.MultiWriter(os.Stdout, logFile)
 	log.SetOutput(multiWriter)
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 }
