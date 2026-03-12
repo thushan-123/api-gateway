@@ -20,5 +20,13 @@ func InitLogs() {
 }
 
 func ErrorLog(err string) {
+	errLogFile, erro := os.OpenFile("error.log", os.O_CREATE|os.O_APPEND, 0666)
+
+	if erro != nil {
+		fmt.Println("fail to open error log file")
+		return
+	}
+
+	_ = io.MultiWriter(os.Stdout, errLogFile) // fix this line
 
 }
